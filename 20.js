@@ -34,30 +34,23 @@ var isValid = function(s) {
   if (s.length % 2 !== 0) {
     return false
   }
-
-  const isOpenBracket = (b) => ['(', '[', '{'].some(i => b === i)
-  const isCLosedBracket = (b) => [')', ']', '}'].some(i => b === i)
+  const map = new Map()
+  map.set('}', '{')
+  map.set(')', '(')
+  map.set(']', '[')
 
   const opend = []
   for (let bracket of s) {
-    if (isOpenBracket(bracket)){
+    if (!map.has(bracket)) {
       opend.push(bracket)
-    }
-    
-    if (isCLosedBracket(bracket) && opend.length === 0) { return false }
-
-
-    if (isCLosedBracket(bracket)){
-      if (bracket === ')' && opend[opend.length - 1] === '(') {
-        opend.pop()
-      } else if (bracket === '}' && opend[opend.length - 1] === '{') {
-        opend.pop()
-      } else if (bracket === ']' && opend[opend.length - 1] === '[') {
+    } else {
+      if (map.get(bracket) === opend[opend.length - 1]) {
         opend.pop()
       } else {
         return false
       }
     }
+
   }
 
   return !opend.length
