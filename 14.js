@@ -24,7 +24,13 @@ strs[i] consists of only lowercase English letters.
 var longestCommonPrefix = function(strs) {
     let currChar = ""
     let resStr = ""
+    if (strs.length === 0) {
+      return ""
+    }
 
+    if (strs.length === 1) {
+      return strs[0]
+    }
     strs.sort((a,b) => a.length - b.length)
     console.log(strs)
     //first elem letters
@@ -45,6 +51,6 @@ var longestCommonPrefix = function(strs) {
 };
 
 
-// console.log(longestCommonPrefix(["cir","car"]))
+console.log(longestCommonPrefix(["cir","car"]))
 console.log(longestCommonPrefix(["flower","flow","flight"]))
-// console.log(longestCommonPrefix(["dog","racecar","car"]))
+console.log(longestCommonPrefix(["dog","racecar","car"]))
